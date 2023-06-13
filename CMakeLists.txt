@@ -4,6 +4,13 @@ cmake_minimum_required(VERSION 3.0.0...3.26.3 FATAL_ERROR)
 # Declare project
 project(DCMTK)
 
+# Allow setting cmake variable for providing a custom site root UID
+set(DCMTK_SITE_UID_ROOT "" CACHE STRING "A custom site root UID")
+mark_as_advanced(DCMTK_SITE_UID_ROOT)
+if( "${DCMTK_SITE_UID_ROOT}" STREQUAL "" )
+	add_definition(-DSITE_UID_ROOT="${DCMTK_SITE_UID_ROOT}")
+endif()
+
 #-----------------------------------------------------------------------------
 # General project settings to configure DCMTK build process
 #-----------------------------------------------------------------------------
